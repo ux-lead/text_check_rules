@@ -36,7 +36,6 @@
 - "PEP" -> ["PPE"]
 - "EUA" -> ["USA", "E.U.A"]
 - "S.A." -> ["S/A", "SA"]
-- "Term 36" -> ["Avoided Term"]
 
 ### Evitar
 - "banco 1" / "banco 2" / "banco X"  # placeholders genéricos. Substitua por "Bradesco" ou "Banco Bradesco"
