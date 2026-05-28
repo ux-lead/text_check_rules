@@ -1,49 +1,74 @@
+# glossary.md
+# Glossário robusto (pt-BR) . v1.0
+# Estrutura: mapeamentos Preferir -> [Sinônimos a evitar] e lista Evitar.
+# O plugin pode usar isso para sugestões e substituições automáticas.
+
 ## VOCABULARIO
 
 ### Preferir
-- "Acessar" / "Acesso" -> ["Entrar", "Entrada", "Logar", "Login", "Logon", "Logado", "Logada"]
-- "biometria facial" -> ["Biometria Facial", "Reconhecimento facial", "Identificação da face", "Biometria do aparelho"]
-- "biometria da palma da mão" -> ["Biometria da Palma da Mão", "Biometria da Mão"]
-- "impressão digital" -> ["Biometria digital", "Biometria do aparelho"]
-- "cashback" -> ["Cashback", "Cash Back", "CASHBACK"]
-- "data do débito" -> ["Data de débito", "Data do pagamento", "Data da transferência", "Data da transação", "Para/pra quando?"]
-- "correspondência" -> ["correio"]
-- "dias" -> ["dias corridos"]
-- "contratar" / "comprar" -> ["Adquirir"]
-- "por meio de" / "pelo" / "pela" -> ["Através"]
-- "querer" -> ["Desejar"]
-- "fazer" / "concluir" -> ["Efetuar", "Realizar"]
-- "inválido" / "inválida" -> ["Não é válido", "Não é válida"]
-- "ter" -> ["Obter"]
-- "fale com seu gerente" / "entre em contato com sua agência" -> ["Procure seu gerente", "Procure sua agência"]
-- "usar" -> ["Utilizar"]
-- "você" -> ["seus clientes", "senhor", "senhora"]
-- "seu" / "sua" -> ["meu", "minha"]
-- "agência" -> ["Agência"]
-- "app" -> ["App", "APP"]
-- "banco" -> ["Banco"]
-- "caixa eletrônico" -> ["Caixa Eletrônico", "Caixa eletrônico"]
-- "email" -> ["e-mail", "E-mail", "Email"]
-- "internet banking" -> ["Internet Banking"]
-- "Pix" -> ["PIX", "pix"]
-- "QR Code" -> ["qr code", "Qr code", "QRCode", "código QR Code"]
-- "Wi-Fi" -> ["wifi", "Wifi", "WIFI"]
-- "Bradesco" / "Banco Bradesco" -> ["bradesco", "banco 1", "banco 2", "banco x", "banco X"]
-- "Visa" -> ["visa", "VISA"]
-- "Mastercard" -> ["mastercard", "MASTERCARD"]
-- "Elo" -> ["elo", "ELO"]
-- "Livelo" -> ["livelo", "LIVELO"]
-- "PEP" -> ["PPE"]
-- "EUA" -> ["USA", "E.U.A"]
-- "S.A." -> ["S/A", "SA"]
+- "Entrar" -> ["Logar", "Login", "Log in", "Sign in"]
+- "Acessar" -> ["Logado", "Logada", "Autenticado", "Autenticada"]
+- "Sair" -> ["Deslogar", "Sign out"]
+- "Conta" -> ["Usuário", "User"]
+- "Pessoa" -> ["Usuário", "Cliente"]  # use conforme contexto
+- "Pessoas" -> ["Usuários", "Clientes"]
+- "Ver detalhes" -> ["Clique aqui", "Saiba mais aqui", "Mais informações aqui"]
+- "Saiba mais" -> ["Clique aqui", "Veja mais aqui"]
+- "Configurações" -> ["Settings", "Preferências"]  # se o produto padroniza
+- "Continuar" -> ["Prosseguir", "Avançar"]  # escolha um padrão
+- "Salvar" -> ["Gravar", "Guardar"]
+- "Enviar" -> ["Submeter"]
+- "Concluir" -> ["Finalizar"]  # escolha um padrão
+- "Tente novamente" -> ["Recarregue a página", "Atualize", "Dê um refresh"]
+- "Não foi possível concluir" -> ["Falhou", "Deu ruim", "Não deu certo"]
+- "Não foi possível carregar" -> ["Erro ao carregar", "Falha ao carregar"]  # padronize
+- "Carregando" -> ["Estamos carregando"]  # prefira curto
+- "Processando" -> ["Estamos processando"]  # prefira curto
+- "Excluir" -> ["Deletar", "Apagar"]  # escolha um padrão
+- "Remover" -> ["Retirar"]  # escolha um padrão
+- "Editar" -> ["Alterar"]  # escolha um padrão
+- "Verificar" -> ["Checar"]  # escolha um padrão
+- "Confirmar" -> ["OK", "Sim"]  # para CTA
+- "Cancelar" -> ["Não"]  # para CTA
 
 ### Evitar
-- "banco 1" / "banco 2" / "banco X"  # placeholders genéricos. Substitua por "Bradesco" ou "Banco Bradesco"
-- "Adquirir"  # usar "contratar" ou "comprar"
-- "Através"  # usar "por meio de", "pelo", "pela"
-- "Deixar na mão" / "Ficar na mão"
-- "Efetuar" / "Realizar"  # usar "fazer" ou "concluir"
-- "Obter"  # usar "ter"
-- "Utilizar"  # usar "usar"
-- "Aposta" / "Chance"
+- "Clique aqui"
+- "Ops!"
+- "Deu ruim"
+- "Falhou"
+- "Logar"
+- "Logado"
+- "Deslogar"
+- "Só hoje"
+- "Última chance"
+- "Erro inesperado"
+- "Algo deu errado"
 
+## REGRAS (lint)
+- id: glossary_avoid_terms_core
+  severity: warn
+  pattern: /\b(clique\s*aqui|ops!|deu\s*ruim|falhou|logar|logado|deslogar|só\s*hoje|última\s*chance|erro\s*inesperado|algo\s*deu\s*errado)\b/i
+  message: Termo fora do glossário. Substitua por termo preferencial.
+  suggestions:
+    - "Ver detalhes"
+    - "Não foi possível concluir"
+    - "Entrar"
+    - "Tente novamente"
+  fix: replace_from_glossary
+
+- id: glossary_prefer_human_terms
+  severity: info
+  pattern: /\b(usuário|clientes)\b/i
+  message: Considere termos mais humanos quando fizer sentido ao contexto.
+  suggestions:
+    - "pessoa"
+    - "pessoas"
+
+- id: glossary_prefer_specific_cta
+  severity: warn
+  pattern: /^(ok|sim|não)$/i
+  message: Prefira CTA específico (verbo + objeto) em vez de OK/Sim/Não.
+  suggestions:
+    - "Confirmar"
+    - "Cancelar"
+    - "Continuar"
