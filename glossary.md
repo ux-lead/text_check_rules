@@ -25,6 +25,7 @@
 - "Verificar" -> ["Checar"]
 - "Confirmar" -> ["OK", "Sim"]
 - "Cancelar" -> ["Não"]
+- "Amor" -> ["amorzinho"]
 
 ### Evitar
 - "Clique aqui"
