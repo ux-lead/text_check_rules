@@ -1,42 +1,4 @@
-# copy.md
-# Diretrizes de copy para produtos digitais (robusto) . v1.0
-# Convenção: regras em REGRAS (lint) são parseáveis.
-# Observação: regras de contexto (button/error/helper/label) podem ser aplicadas via heurística do plugin.
-
-## PRINCIPIOS DE UX WRITING
-- Comece pelo objetivo: o que a pessoa precisa fazer agora.
-- Seja específico: “Salvar alterações” é melhor que “OK”.
-- Antecipe dúvidas: formato, limite, prazo, e o “por quê” quando necessário.
-- Seja consistente: termos, capitalização, padrões de erro, números e datas.
-- Reduza carga cognitiva: uma instrução por frase.
-
-## PADROES RECOMENDADOS
-### Botões
-- Verbo no imperativo: "Continuar", "Salvar", "Enviar".
-- Ação destrutiva com clareza: "Excluir", "Remover".
-- Evite "Sim/Não" como ação principal em modais. Prefira ações: "Cancelar", "Confirmar".
-
-### Erros
-- Estrutura: "Não foi possível {ação}. {próximo passo}."
-- Se for validação: "Informe {campo} para continuar."
-- Se for sistema: "Estamos com instabilidade. Tente mais tarde."
-
-### Campos e formulários
-- Label: nome do campo.
-- Helper: exemplo e formato. Ex.: "Ex.: nome@dominio.com".
-- Placeholder não substitui label.
-
-### Datas e números
-- Evite ambiguidade: preferir DD/MM/AAAA em pt-BR.
-- Valores: "R$ 1.234,56".
-- Evite datas relativas em mensagens persistentes.
-
-### Microcópias úteis
-- Estados: carregando, vazio, sucesso, falha.
-- Confirmações: explique impacto quando existir (ex.: “Isso remove acesso”).
-
 ## REGRAS (lint)
-# Ações e CTAs
 - id: copy_no_click_here
   severity: error
   pattern: /\b(clique\s*aqui|click\s*here|toque\s*aqui|tap\s*here)\b/i
@@ -71,7 +33,6 @@
     - "Continue"
     - "Concluir"
 
-# Pontuação e espaços
 - id: copy_no_double_space
   severity: info
   pattern: / {2,}/
@@ -104,7 +65,6 @@
   suggestions:
     - "Use apenas um sinal de pontuação."
 
-# Linguagem clara
 - id: copy_avoid_generic_error
   severity: error
   pattern: /\b(erro\s*inesperado|algo\s*deu\s*errado|ocorreu\s*um\s*erro)\b/i
@@ -119,7 +79,7 @@
   message: Considere voz ativa para maior clareza.
   suggestions:
     - "Processando"
-    - "Estamos processando"  # use apenas se necessário
+    - "Estamos processando"
 
 - id: copy_avoid_company_jargon
   severity: warn
@@ -145,7 +105,6 @@
     - "Importante: ..."
     - "Atenção: ..."
 
-# Consistência de termos
 - id: copy_avoid_login_logar
   severity: warn
   pattern: /\b(logar|logado|logada|login|log\s*in)\b/i
@@ -162,7 +121,6 @@
     - "Ex.: {exemplo}"
     - "Use o formato {exemplo}."
 
-# Labels e títulos
 - id: copy_label_no_trailing_punct
   severity: info
   pattern: /[:.]\s*$/
@@ -177,7 +135,6 @@
   suggestions:
     - "Padronize para frase normal ou Title Case, de forma consistente."
 
-# Datas, números e moeda (pt-BR)
 - id: copy_currency_brl_format
   severity: info
   pattern: /\bR\$\s?\d+(\.\d{3})*(,\d{2})?\b/
@@ -199,7 +156,6 @@
   suggestions:
     - "Use data real (DD/MM/AAAA) quando o texto for persistente."
 
-# Acessibilidade e inclusão
 - id: copy_avoid_capacitist_terms
   severity: warn
   pattern: /\b(c*ego|ceguinho|surdo\s*mudo|retardado|débil|louco|maluco)\b/i
@@ -215,7 +171,6 @@
     - "a pessoa"
     - "quem usa"
 
-# Segurança e privacidade (clareza)
 - id: copy_security_explain_action
   severity: info
   pattern: /\b(por\s*segurança)\b/i
@@ -223,7 +178,6 @@
   suggestions:
     - "Para manter sua conta segura, vamos confirmar {algo}."
 
-# Tamanho e densidade
 - id: copy_too_long_for_ui
   severity: info
   pattern: /^.{181,}$/
@@ -231,3 +185,9 @@
   suggestions:
     - "Divida em frases curtas."
     - "Mova detalhes para uma tela de suporte."
+
+- id: rule-1780343050093
+  severity: warn
+  pattern: /regex/i
+  message: New rule message
+
