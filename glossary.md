@@ -26,6 +26,7 @@
 - "Confirmar" -> ["OK", "Sim"]
 - "Cancelar" -> ["Não"]
 - "Amor" -> ["amorzinho"]
+- "Vida" -> ["Life"]
 
 ### Evitar
 - "Clique aqui"
